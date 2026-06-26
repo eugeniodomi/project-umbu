@@ -1,0 +1,36 @@
+[
+  {
+    "id": "p1",
+    "nome": "Tapioca de Carne de Sol",
+    "descricao": "Deliciosa tapioca recheada com carne de sol e queijo coalho.",
+    "preco": 15.50,
+    "categoria": "Salgados",
+    "disponivel": true
+  },
+  {
+    "id": "p2",
+    "nome": "Cuscuz com Ovo e Queijo",
+    "descricao": "Tradicional cuscuz nordestino acompanhado de ovo frito e queijo coalho.",
+    "preco": 12.00,
+    "categoria": "Salgados",
+    "disponivel": true
+  },
+  {
+    "id": "p3",
+    "nome": "Bolo de Milho",
+    "descricao": "Bolo de milho cremoso, receita especial.",
+    "preco": 8.50,
+    "categoria": "Doces",
+    "disponivel": true,
+    "sazonalJunino": true
+  },
+  {
+    "id": "p4",
+    "nome": "Pamonha",
+    "descricao": "Pamonha doce tradicional.",
+    "preco": 10.00,
+    "categoria": "Doces",
+    "disponivel": false,
+    "sazonalJunino": true
+  }
+]

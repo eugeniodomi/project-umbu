@@ -1,0 +1,20 @@
+[
+  {
+    "id": "f1",
+    "nome": "Franquia Centro",
+    "status": "ativa",
+    "canais": ["APP", "TOTEM", "PICKUP"]
+  },
+  {
+    "id": "f2",
+    "nome": "Franquia Shopping Norte",
+    "status": "ativa",
+    "canais": ["APP", "PICKUP"]
+  },
+  {
+    "id": "f3",
+    "nome": "Franquia Bairro Sul",
+    "status": "reduzida",
+    "canais": ["PICKUP"]
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "u1",
+    "nome": "João da Silva",
+    "email": "joao@example.com",
+    "senha": "password123",
+    "saldoPontosFidelidade": 150
+  },
+  {
+    "id": "u2",
+    "nome": "Maria de Sousa",
+    "email": "maria@example.com",
+    "senha": "password123",
+    "saldoPontosFidelidade": 45
+  }
+]
