@@ -15,9 +15,6 @@ export const FranquiaSelectionPage: React.FC = () => {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <Button onClick={() => navigate('/')} variant="secondary" style={{ marginBottom: '1rem' }}>
-          Voltar para o Login
-        </Button>
         <h2 style={{ margin: 0 }}>Selecione uma Franquia</h2>
       </div>
       <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
