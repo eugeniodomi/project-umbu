@@ -1,4 +1,5 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ConsentBanner } from '../ui/ConsentBanner';
 import { Button } from '../ui/Button';
@@ -9,6 +10,19 @@ interface PageWrapperProps {
 
 export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
   const { usuario, logout } = useAuth();
+  const navigate = useNavigate();
+  const [isLoggingOff, setIsLoggingOff] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggingOff(true); // Ativa o aviso visual de logoff
+    
+    // Aguarda 1.5s para exibir o feedback visual antes de limpar o estado e redirecionar
+    setTimeout(() => {
+      logout();
+      navigate('/', { replace: true });
+      setIsLoggingOff(false);
+    }, 1500);
+  };
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f8f9fa' }}>
@@ -17,7 +31,7 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
         {usuario && (
           <div className="header-user">
             <span style={{ fontWeight: '500' }}>Olá, {usuario.nome}</span>
-            <Button variant="secondary" onClick={logout}>Sair</Button>
+            <Button variant="secondary" onClick={handleLogout}>Sair</Button>
           </div>
         )}
       </header>
@@ -27,6 +41,23 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
       </main>
 
       <ConsentBanner />
+
+      {isLoggingOff && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.8)',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999,
+          fontSize: '1.5rem',
+          fontWeight: 'bold'
+        }}>
+          Desconectando... Até logo!
+        </div>
+      )}
     </div>
   );
 };
