@@ -10,13 +10,13 @@ export const MenuPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="page-container fade-in">
       <div className="menu-header">
         <div className="menu-actions">
           <Button onClick={() => navigate('/franquias')} variant="secondary">
             Alterar Unidade / Voltar
           </Button>
-          <h2 style={{ margin: 0 }}>Cardápio</h2>
+          <h2 style={{ margin: 0, color: 'var(--color-primary)' }}>Cardápio</h2>
         </div>
         <Button onClick={() => navigate('/carrinho')} variant="secondary">
           Ver Carrinho
@@ -25,22 +25,14 @@ export const MenuPage: React.FC = () => {
       
       <div className="responsive-grid">
         {produtosData.map((produto) => (
-          <div key={produto.id} style={{ 
-            border: '1px solid #ced4da', 
-            padding: '1.5rem', 
-            borderRadius: '0.5rem',
-            backgroundColor: '#fff',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}>
+          <div key={produto.id} className="card clickable">
             <div>
-              <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>{produto.nome}</h3>
+              <h3 style={{ marginTop: 0, marginBottom: '0.5rem', color: 'var(--color-primary)' }}>{produto.nome}</h3>
               {produto.promocao && (
                 <span style={{
                   display: 'inline-block',
-                  backgroundColor: '#ffc107',
-                  color: '#000',
+                  backgroundColor: 'var(--color-secondary)',
+                  color: '#FFF',
                   padding: '0.2rem 0.5rem',
                   borderRadius: '4px',
                   fontSize: '0.8rem',
@@ -50,19 +42,21 @@ export const MenuPage: React.FC = () => {
                   {produto.promocao}
                 </span>
               )}
-              <p style={{ color: '#6c757d', marginBottom: '1rem' }}>{produto.descricao}</p>
-              <p style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#198754' }}>
+              <p style={{ color: 'var(--color-text-muted)', marginBottom: '1rem', lineHeight: '1.5' }}>{produto.descricao}</p>
+              <p style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#166534' }}>
                 R$ {produto.preco.toFixed(2).replace('.', ',')}
               </p>
             </div>
             
-            <Button 
-              onClick={() => adicionarAoCarrinho(produto as Produto)}
-              disabled={!produto.disponivel}
-              style={{ marginTop: '1rem', width: '100%' }}
-            >
-              {produto.disponivel ? 'Adicionar ao Carrinho' : 'Indisponível'}
-            </Button>
+            <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
+              <Button 
+                onClick={() => adicionarAoCarrinho(produto as Produto)}
+                disabled={!produto.disponivel}
+                style={{ width: '100%' }}
+              >
+                {produto.disponivel ? 'Adicionar ao Carrinho' : 'Indisponível'}
+              </Button>
+            </div>
           </div>
         ))}
       </div>

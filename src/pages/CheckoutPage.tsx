@@ -53,14 +53,14 @@ export const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
-      <h2 style={{ marginBottom: '2rem' }}>Checkout</h2>
+    <div className="page-container fade-in" style={{ maxWidth: '800px' }}>
+      <h2 style={{ marginBottom: '2rem', color: 'var(--color-primary)' }}>Checkout</h2>
       
-      <div style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '0.5rem', border: '1px solid #ced4da', marginBottom: '2rem' }}>
-        <h3 style={{ marginTop: 0 }}>Resumo do Pedido</h3>
+      <div className="card" style={{ marginBottom: '2rem' }}>
+        <h3 style={{ marginTop: 0, color: 'var(--color-text-main)' }}>Resumo do Pedido</h3>
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {items.map((item) => (
-            <li key={item.produto.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', borderBottom: '1px solid #e9ecef', paddingBottom: '0.5rem' }}>
+            <li key={item.produto.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>
               <span>{item.quantidade}x {item.produto.nome}</span>
               <span>R$ {(item.produto.preco * item.quantidade).toFixed(2).replace('.', ',')}</span>
             </li>
@@ -68,12 +68,12 @@ export const CheckoutPage: React.FC = () => {
         </ul>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.25rem', marginTop: '1rem' }}>
           <span>Total:</span>
-          <span style={{ color: '#198754' }}>R$ {valorTotal.toFixed(2).replace('.', ',')}</span>
+          <span style={{ color: '#166534' }}>R$ {valorTotal.toFixed(2).replace('.', ',')}</span>
         </div>
       </div>
 
       {errorMessage && (
-        <div style={{ backgroundColor: '#f8d7da', color: '#842029', padding: '1rem', borderRadius: '0.5rem', marginBottom: '1rem', border: '1px solid #f5c2c7' }}>
+        <div style={{ backgroundColor: '#FEF2F2', color: '#DC2626', padding: '1rem', borderRadius: 'var(--border-radius)', marginBottom: '1rem', border: '1px solid #FCA5A5' }}>
           {errorMessage}
         </div>
       )}

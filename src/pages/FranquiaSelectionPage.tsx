@@ -36,25 +36,19 @@ export const FranquiaSelectionPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: '2rem' }}>
-        <h2 style={{ margin: 0 }}>Selecione uma Franquia</h2>
+    <div className="page-container fade-in">
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <h2 style={{ margin: 0, color: 'var(--color-primary)' }}>Selecione uma Franquia</h2>
       </div>
       <div className="responsive-grid">
         {franquiasData.map((franquia) => (
-          <div key={franquia.id} style={{ 
-            border: '1px solid #ced4da', 
-            padding: '1.5rem', 
-            borderRadius: '0.5rem',
-            backgroundColor: '#fff',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-          }}>
-            <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>{franquia.nome}</h3>
+          <div key={franquia.id} className="card clickable">
+            <h3 style={{ marginTop: 0, marginBottom: '0.5rem', color: 'var(--color-primary)' }}>{franquia.nome}</h3>
             <div style={{ marginBottom: '1rem' }}>
               {getStatusDisplay(franquia.status)}
             </div>
             <p style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-              <span style={{ marginRight: '0.5rem' }}>Atendimento:</span>
+              <span style={{ marginRight: '0.5rem', fontWeight: 500 }}>Atendimento:</span>
               {franquia.canais.map(canal => {
                 const canalMap: Record<string, string> = {
                   APP: '📱 App',
@@ -65,8 +59,9 @@ export const FranquiaSelectionPage: React.FC = () => {
                 return (
                   <span key={canal} style={{
                     display: 'inline-block',
-                    backgroundColor: '#e9ecef',
-                    color: '#495057',
+                    backgroundColor: 'var(--color-bg-main)',
+                    border: '1px solid #E5E7EB',
+                    color: 'var(--color-text-main)',
                     padding: '0.2rem 0.6rem',
                     borderRadius: '12px',
                     fontSize: '0.85rem',
@@ -80,12 +75,14 @@ export const FranquiaSelectionPage: React.FC = () => {
                 );
               })}
             </p>
-            <Button 
-              onClick={() => handleSelect(franquia.id)}
-              style={{ marginTop: '1rem', width: '100%' }}
-            >
-              Selecionar
-            </Button>
+            <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+              <Button 
+                onClick={() => handleSelect(franquia.id)}
+                style={{ width: '100%' }}
+              >
+                Selecionar
+              </Button>
+            </div>
           </div>
         ))}
       </div>

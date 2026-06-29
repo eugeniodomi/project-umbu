@@ -29,26 +29,28 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto', padding: '0 1rem' }}>
-      <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Login</h2>
-      <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <Input 
-          label="Email" 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        <Input 
-          label="Senha" 
-          type="password" 
-          value={senha} 
-          onChange={(e) => setSenha(e.target.value)} 
-          required 
-        />
-        {error && <div style={{ color: '#dc3545', marginBottom: '1rem' }}>{error}</div>}
-        <Button type="submit">Entrar</Button>
-      </form>
+    <div className="page-container fade-in" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 150px)' }}>
+      <div className="card" style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 style={{ marginBottom: '1.5rem', textAlign: 'center', color: 'var(--color-primary)' }}>Login</h2>
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <Input 
+            label="Email" 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            required 
+          />
+          <Input 
+            label="Senha" 
+            type="password" 
+            value={senha} 
+            onChange={(e) => setSenha(e.target.value)} 
+            required 
+          />
+          {error && <div style={{ color: '#DC2626', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
+          <Button type="submit" style={{ marginTop: '1rem' }}>Entrar</Button>
+        </form>
+      </div>
     </div>
   );
 };

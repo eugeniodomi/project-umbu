@@ -11,33 +11,18 @@ export const Button: React.FC<ButtonProps> = ({
   isLoading, 
   className = '', 
   disabled, 
+  style,
   ...props 
 }) => {
-  const getBackgroundColor = () => {
-    switch (variant) {
-      case 'secondary': return '#6c757d';
-      case 'danger': return '#dc3545';
-      case 'primary':
-      default: return '#0d6efd';
-    }
-  };
+  const baseClass = 'btn';
+  const variantClass = variant === 'secondary' ? 'btn-secondary' : variant === 'danger' ? 'btn-danger' : 'btn-primary';
+  const combinedClassName = `${baseClass} ${variantClass} ${className}`.trim();
 
   return (
     <button 
-      className={className}
+      className={combinedClassName}
       disabled={isLoading || disabled}
-      style={{
-        padding: '0.5rem 1rem',
-        borderRadius: '0.25rem',
-        border: 'none',
-        cursor: (isLoading || disabled) ? 'not-allowed' : 'pointer',
-        opacity: (isLoading || disabled) ? 0.65 : 1,
-        backgroundColor: getBackgroundColor(),
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: '1rem',
-        transition: 'opacity 0.2s'
-      }}
+      style={style}
       {...props}
     >
       {isLoading ? 'Carregando...' : children}
