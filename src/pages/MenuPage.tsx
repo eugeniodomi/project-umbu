@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { Button } from '../components/ui/Button';
@@ -6,8 +6,19 @@ import produtosData from '../infrastructure/mock/produtos.json';
 import { type Produto } from '../domain/models/Produto';
 
 export const MenuPage: React.FC = () => {
-  const { adicionarAoCarrinho } = useCart();
+  const { adicionarAoCarrinho, items } = useCart();
   const navigate = useNavigate();
+  const [addedItems, setAddedItems] = useState<Record<string, boolean>>({});
+
+  const handleAddToCart = (produto: Produto) => {
+    adicionarAoCarrinho(produto);
+    setAddedItems(prev => ({ ...prev, [produto.id]: true }));
+    setTimeout(() => {
+      setAddedItems(prev => ({ ...prev, [produto.id]: false }));
+    }, 800);
+  };
+
+  const quantidadeTotal = items.reduce((acc, item) => acc + item.quantidade, 0);
 
   return (
     <div className="page-container fade-in">
@@ -18,9 +29,16 @@ export const MenuPage: React.FC = () => {
           </Button>
           <h2 style={{ margin: 0, color: 'var(--color-primary)' }}>Cardápio</h2>
         </div>
-        <Button onClick={() => navigate('/carrinho')} variant="secondary">
-          Ver Carrinho
-        </Button>
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <Button onClick={() => navigate('/carrinho')} variant="secondary">
+            Ver Carrinho
+          </Button>
+          {quantidadeTotal > 0 && (
+            <span className="cart-badge" key={quantidadeTotal}>
+              {quantidadeTotal}
+            </span>
+          )}
+        </div>
       </div>
       
       <div className="responsive-grid">
@@ -50,11 +68,14 @@ export const MenuPage: React.FC = () => {
             
             <div style={{ marginTop: 'auto', paddingTop: '1rem' }}>
               <Button 
-                onClick={() => adicionarAoCarrinho(produto as Produto)}
+                onClick={() => handleAddToCart(produto as Produto)}
                 disabled={!produto.disponivel}
-                style={{ width: '100%' }}
+                style={{ 
+                  width: '100%',
+                  ...(addedItems[produto.id] ? { backgroundColor: '#10B981', color: '#FFF' } : {})
+                }}
               >
-                {produto.disponivel ? 'Adicionar ao Carrinho' : 'Indisponível'}
+                {addedItems[produto.id] ? '✅ Adicionado!' : (produto.disponivel ? 'Adicionar ao Carrinho' : 'Indisponível')}
               </Button>
             </div>
           </div>
