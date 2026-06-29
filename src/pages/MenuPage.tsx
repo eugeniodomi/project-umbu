@@ -36,6 +36,20 @@ export const MenuPage: React.FC = () => {
           }}>
             <div>
               <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>{produto.nome}</h3>
+              {produto.promocao && (
+                <span style={{
+                  display: 'inline-block',
+                  backgroundColor: '#ffc107',
+                  color: '#000',
+                  padding: '0.2rem 0.5rem',
+                  borderRadius: '4px',
+                  fontSize: '0.8rem',
+                  fontWeight: 'bold',
+                  marginBottom: '0.5rem'
+                }}>
+                  {produto.promocao}
+                </span>
+              )}
               <p style={{ color: '#6c757d', marginBottom: '1rem' }}>{produto.descricao}</p>
               <p style={{ fontWeight: 'bold', fontSize: '1.25rem', color: '#198754' }}>
                 R$ {produto.preco.toFixed(2).replace('.', ',')}

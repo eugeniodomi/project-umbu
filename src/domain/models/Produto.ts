@@ -6,4 +6,5 @@ export interface Produto {
   categoria: string;
   disponivel: boolean;
   sazonalJunino?: boolean;
+  promocao?: string;
 }

@@ -5,7 +5,8 @@
     "descricao": "Deliciosa tapioca recheada com carne de sol e queijo coalho.",
     "preco": 15.50,
     "categoria": "Salgados",
-    "disponivel": true
+    "disponivel": true,
+    "promocao": "10% OFF"
   },
   {
     "id": "p2",
@@ -22,7 +23,8 @@
     "preco": 8.50,
     "categoria": "Doces",
     "disponivel": true,
-    "sazonalJunino": true
+    "sazonalJunino": true,
+    "promocao": "Preço Especial"
   },
   {
     "id": "p4",
