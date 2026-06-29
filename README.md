@@ -41,6 +41,7 @@ projeto-umbu/
 │   ├── pages/              # Telas principais associadas às rotas
 │   └── App.tsx             # Ponto de entrada e configuração de rotas
 └── vitest/cypress configs  # Configurações de automação de QA
+```
 
 ## Critérios Acadêmicos Atendidos (Matriz de Qualidade)
 Para guiar a avaliação técnica, os seguintes requisitos foram implementados de forma rastreável no
