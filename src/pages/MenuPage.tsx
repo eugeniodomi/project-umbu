@@ -11,8 +11,8 @@ export const MenuPage: React.FC = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div className="menu-header">
+        <div className="menu-actions">
           <Button onClick={() => navigate('/franquias')} variant="secondary">
             Alterar Unidade / Voltar
           </Button>
@@ -23,7 +23,7 @@ export const MenuPage: React.FC = () => {
         </Button>
       </div>
       
-      <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+      <div className="responsive-grid">
         {produtosData.map((produto) => (
           <div key={produto.id} style={{ 
             border: '1px solid #ced4da', 

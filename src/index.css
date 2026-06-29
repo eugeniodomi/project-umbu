@@ -1,0 +1,84 @@
+/* Reset básico para evitar vazamento horizontal com paddings */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Header responsivo */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #212529;
+  color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Grid responsivo para Franquias e Cardápio */
+.responsive-grid {
+  display: grid;
+  gap: 1rem;
+  /* Largura fluida no grid para evitar quebra de layout no mobile */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+/* Header da página de Menu (Cardápio) */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  /* Empilha os elementos do Header no mobile e garante 100% da largura */
+  .app-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  /* Empilha as informações e botões do usuário no mobile */
+  .header-user {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header-user button {
+    width: 100%;
+  }
+
+  /* Empilha o cabeçalho do Menu (título e botões) no mobile */
+  .menu-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .menu-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu-header button,
+  .menu-actions button {
+    width: 100%;
+  }
+}

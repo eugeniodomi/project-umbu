@@ -40,7 +40,7 @@ export const FranquiaSelectionPage: React.FC = () => {
       <div style={{ marginBottom: '2rem' }}>
         <h2 style={{ margin: 0 }}>Selecione uma Franquia</h2>
       </div>
-      <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+      <div className="responsive-grid">
         {franquiasData.map((franquia) => (
           <div key={franquia.id} style={{ 
             border: '1px solid #ced4da', 

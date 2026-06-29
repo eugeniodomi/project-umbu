@@ -29,7 +29,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '0 auto' }}>
+    <div style={{ width: '100%', maxWidth: '400px', margin: '0 auto', padding: '0 1rem' }}>
       <h2 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Login</h2>
       <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <Input 
