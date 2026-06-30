@@ -1,2 +1,2 @@
-export * from './AuthContext';
-export * from './CartContext';
+export * from '../context/AuthContext';
+export * from '../context/CartContext';

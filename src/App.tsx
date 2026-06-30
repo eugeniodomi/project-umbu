@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -15,26 +16,26 @@ import { ProfilePage } from './pages/ProfilePage';
 import { AboutPage } from './pages/AboutPage';
 import { Failed } from './pages/Failed';
 
-function RequireAuth({ children }: { children: JSX.Element }) {
+function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   if (!auth.isAuthenticated()) {
     // redirect to /failed (requested behavior)
     return <Navigate to="/failed" state={{ from: location }} replace />;
   }
-  return children;
+  return <>{children}</>;
 }
 
-function PreventAuthAccess({ children }: { children: JSX.Element }) {
+function PreventAuthAccess({ children }: { children: React.ReactNode }) {
   // Prevent access to login page when already authenticated
   if (auth.isAuthenticated()) {
     return <Navigate to="/franquias" replace />;
   }
-  return children;
+  return <>{children}</>;
 }
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/project-umbu/">
       <AuthProvider>
         <CartProvider>
           <PageWrapper>
