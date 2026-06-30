@@ -2,6 +2,13 @@
 
 Este repositório contém a aplicação baseada no estudo de caso "Raízes do Nordeste", desenvolvida como requisito prático para a disciplina de **Projeto Multidisciplinar - Qualidade de Software**.
 
+## 🌐 Acesso rápido
+
+- **Aplicação online:** [https://eugeniodomi.github.io/project-umbu/](https://eugeniodomi.github.io/project-umbu/)
+- **Repositório GitHub:** [https://github.com/eugeniodomi/project-umbu](https://github.com/eugeniodomi/project-umbu)
+
+Esses links permitem navegar de forma rápida entre a versão publicada da aplicação e o código-fonte do projeto.
+
 O foco principal deste projeto **não é** a entrega de um produto comercial completo, mas sim a construção de um ambiente governável para a **Garantia da Qualidade (QA)**, evidenciando boas práticas de arquitetura, testes automatizados (Unitários e E2E), rastreabilidade e conformidade com requisitos não funcionais (como usabilidade e LGPD).
 
 ---
