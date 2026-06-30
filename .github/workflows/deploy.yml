@@ -17,8 +17,6 @@ concurrency:
 jobs:
   # O job é mantido em uma única etapa para evitar duplicação de artefatos
   # e garantir que a re-execução não reutilize artefatos antigos.
-  # Commit adicionado para forçar um novo run limpo e resolver o erro de múltiplos artifacts.
-  # Commit extra para forçar push e disparar novo deploy.
   deploy:
     environment:
       name: github-pages
