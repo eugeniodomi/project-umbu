@@ -13,6 +13,9 @@ export const LoginPage: React.FC = () => {
   const [showTips, setShowTips] = useState(() => {
     return localStorage.getItem('show_login_tips') === 'true';
   });
+  const [showValidation, setShowValidation] = useState(() => {
+    return localStorage.getItem('show_validation_links') === 'true';
+  });
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -20,6 +23,12 @@ export const LoginPage: React.FC = () => {
     const newVal = !showTips;
     setShowTips(newVal);
     localStorage.setItem('show_login_tips', String(newVal));
+  };
+
+  const handleToggleValidation = () => {
+    const newVal = !showValidation;
+    setShowValidation(newVal);
+    localStorage.setItem('show_validation_links', String(newVal));
   };
 
   const handleCopy = (text: string) => {
@@ -111,6 +120,35 @@ export const LoginPage: React.FC = () => {
           {error && <div style={{ color: '#DC2626', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
           <Button type="submit" style={{ marginTop: '1rem' }}>Entrar</Button>
         </form>
+      </div>
+
+      {/* Validation Links Panel */}
+      <div style={{ width: '100%', maxWidth: '400px', marginTop: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <button
+          onClick={handleToggleValidation}
+          aria-expanded={showValidation}
+          aria-controls="validation-panel"
+          style={{ background: 'none', border: 'none', color: 'var(--color-text-light)', fontSize: '0.875rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', textDecoration: 'underline' }}
+          title="Links para avaliadores"
+        >
+          <span role="img" aria-label="info">ℹ️</span> Acesso rápido
+        </button>
+
+        {showValidation && (
+          <div id="validation-panel" style={{ marginTop: '0.75rem', padding: '1rem', background: 'var(--color-surface)', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-sm)', border: '1px solid var(--color-primary-light)', width: '100%', fontSize: '0.875rem' }}>
+            <p style={{ color: 'var(--color-text-light)', marginBottom: '1rem', textAlign: 'center', lineHeight: '1.4' }}>
+              Este atalho foi criado para avaliadores e validações rápidas. Use os links abaixo para acessar a aplicação publicada ou consultar o código-fonte.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}>
+              <a href="https://eugeniodomi.github.io/project-umbu/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span role="img" aria-label="web">🌐</span> Aplicação online
+              </a>
+              <a href="https://github.com/eugeniodomi/project-umbu" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span role="img" aria-label="github">📦</span> Repositório GitHub
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
