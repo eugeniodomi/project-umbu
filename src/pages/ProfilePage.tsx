@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import perfilMock from '../infrastructure/mock/perfil.json';
+import { CookiePreferencesModal } from '../components/ui/CookiePreferencesModal';
 
 export const ProfilePage: React.FC = () => {
   const [endereco, setEndereco] = useState(perfilMock.enderecoPadrao);
   const [mensagem, setMensagem] = useState('');
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSave = (e: React.FormEvent) => {
@@ -87,6 +89,21 @@ export const ProfilePage: React.FC = () => {
           ))}
         </ul>
       </div>
+
+      <div className="card" style={{ marginTop: '2rem' }}>
+        <h3 style={{ marginTop: 0, color: 'var(--color-text-main)' }}>Privacidade e Proteção de Dados (LGPD)</h3>
+        <p style={{ color: 'var(--color-text-main)', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+          Você pode revisar e atualizar suas preferências de consentimento de cookies e tratamento de dados pessoais a qualquer momento, de acordo com a LGPD.
+        </p>
+        <Button variant="secondary" onClick={() => setIsCookieModalOpen(true)}>
+          Gerenciar Preferências de Cookies
+        </Button>
+      </div>
+
+      <CookiePreferencesModal 
+        isOpen={isCookieModalOpen} 
+        onClose={() => setIsCookieModalOpen(false)} 
+      />
     </div>
   );
 };
