@@ -35,7 +35,7 @@ function PreventAuthAccess({ children }: { children: React.ReactNode }) {
 
 const App = () => {
   return (
-    <BrowserRouter basename="/project-umbu/">
+    <BrowserRouter basename="/project-umbu">
       <AuthProvider>
         <CartProvider>
           <PageWrapper>
