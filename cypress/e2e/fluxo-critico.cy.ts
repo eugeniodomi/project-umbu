@@ -6,6 +6,7 @@ describe('Fluxo Crítico da Aplicação', () => {
     cy.get('button').contains(/aceitar|concordar|entendi/i).click();
 
     // 2. Login
+    cy.url().should('include', '/project-umbu');
     cy.get('input[type="email"]').type('joao@example.com');
     cy.get('input[type="password"]').type('password123');
     cy.get('button').contains(/entrar/i).click();

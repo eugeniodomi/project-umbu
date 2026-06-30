@@ -1,15 +1,26 @@
 describe('Segurança - Route Guards (RNF-Segurança)', () => {
+  beforeEach(() => {
+    cy.clearLocalStorage();
+  });
   
   it('Cenário A (Tentativa de acesso sem login): Deve redirecionar de /franquias para /', () => {
-    cy.clearLocalStorage();
     cy.visit('/project-umbu/franquias');
     
     // Afirma que a URL foi redirecionada de volta para / (Login)
-    cy.location('pathname').should('include', '/project-umbu');
+    cy.location('pathname').should('eq', '/project-umbu/');
+    cy.contains('Login').should('be.visible');
   });
 
-  it('Cenário B (Login válido): Deve levar o usuário para /franquias', () => {
-    cy.clearLocalStorage();
+  it('Cenário B (Acesso à raiz sem login): Deve mostrar a tela de login', () => {
+    cy.visit('/project-umbu/');
+    
+    // Afirma que está na raiz e mostra login
+    cy.location('pathname').should('eq', '/project-umbu/');
+    cy.contains('Login').should('be.visible');
+    cy.get('input[type="email"]').should('be.visible');
+  });
+
+  it('Cenário C (Login válido): Deve levar o usuário para /franquias', () => {
     cy.visit('/project-umbu/');
     cy.get('input[type="email"]').type('joao@example.com');
     cy.get('input[type="password"]').type('password123');

@@ -24,8 +24,14 @@ describe('Mobile - Responsividade e Navegação (RNF-05)', () => {
   });
 
   it('deve garantir que os elementos são clicáveis no layout empilhado (mobile) sem falhas de sobreposição', () => {
+    // Interagir com o painel de ajuda para garantir que os campos fiquem clicáveis após expansão/recolhimento
+    cy.contains('Dicas de Acesso').click();
+    cy.contains('joao@example.com').should('be.visible');
+    cy.contains('Dicas de Acesso').click(); // recolher
+    cy.contains('joao@example.com').should('not.exist');
+
     // Fazer o login preenchendo email e senha e clicando em "Entrar"
-    cy.get('input[type="email"]').should('be.visible').clear().type('joao@example.com', { force: true });
+    cy.get('input[type="email"]').should('be.visible').clear().type('joao@example.com');
     cy.get('input[type="password"]').should('be.visible').clear().type('password123', { force: true });
     cy.contains('button', /Entrar|entrar/i).click();
 
