@@ -12,12 +12,6 @@ export const LoginPage: React.FC = () => {
   const { login, usuario } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (usuario || auth.isAuthenticated()) {
-      navigate('/franquias', { replace: true });
-    }
-  }, [usuario, navigate]);
-
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');

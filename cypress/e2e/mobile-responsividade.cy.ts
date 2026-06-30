@@ -1,7 +1,8 @@
 describe('Mobile - Responsividade e Navegação (RNF-05)', () => {
   beforeEach(() => {
+    cy.clearLocalStorage();
     cy.viewport('iphone-x');
-    cy.visit('/');
+    cy.visit('/project-umbu/');
     // aguarda o banner aparecer e tentar fechá-lo (se estiver presente)
     cy.get('body').then(($b) => {
       if ($b.find('#rgpd-banner[data-visible="true"]').length) {
@@ -29,7 +30,7 @@ describe('Mobile - Responsividade e Navegação (RNF-05)', () => {
     cy.contains('button', /Entrar|entrar/i).click();
 
     // Navegar até as franquias (valida o redirecionamento pós login)
-    cy.location('pathname', { timeout: 8000 }).should('eq', '/franquias');
+    cy.location('pathname', { timeout: 8000 }).should('include', '/franquias');
 
     // Selecionar uma franquia
     cy.contains('button', /Selecionar|ver cardápio/i).first().click();
@@ -39,7 +40,7 @@ describe('Mobile - Responsividade e Navegação (RNF-05)', () => {
     cy.contains('button', /Adicionar|comprar/i).first().click();
 
     // Ir para o carrinho
-    cy.visit('/carrinho');
+    cy.visit('/project-umbu/carrinho');
 
     // Validar se chegou no carrinho e se os elementos principais estão visíveis
     cy.contains(/Seu Carrinho|Carrinho/i, { timeout: 8000 }).should('be.visible');

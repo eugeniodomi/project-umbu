@@ -1,7 +1,8 @@
 describe('Fluxo Crítico da Aplicação', () => {
   it('Deve realizar a jornada completa: login, adicionar ao carrinho e checkout', () => {
+    cy.clearLocalStorage();
     // 1. Acesso e LGPD
-    cy.visit('/');
+    cy.visit('/project-umbu/');
     cy.get('button').contains(/aceitar|concordar|entendi/i).click();
 
     // 2. Login

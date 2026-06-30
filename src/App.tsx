@@ -19,16 +19,8 @@ import { Failed } from './pages/Failed';
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   if (!auth.isAuthenticated()) {
-    // redirect to /failed (requested behavior)
-    return <Navigate to="/failed" state={{ from: location }} replace />;
-  }
-  return <>{children}</>;
-}
-
-function PreventAuthAccess({ children }: { children: React.ReactNode }) {
-  // Prevent access to login page when already authenticated
-  if (auth.isAuthenticated()) {
-    return <Navigate to="/franquias" replace />;
+    // redirect to /
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
   return <>{children}</>;
 }
@@ -40,11 +32,7 @@ const App = () => {
         <CartProvider>
           <PageWrapper>
             <Routes>
-              <Route path="/" element={
-                <PreventAuthAccess>
-                  <LoginPage />
-                </PreventAuthAccess>
-              } />
+              <Route path="/" element={<LoginPage />} />
               <Route path="/franquias" element={
                 <RequireAuth>
                   <FranquiaSelectionPage />
