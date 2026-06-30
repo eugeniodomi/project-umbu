@@ -1,6 +1,7 @@
 import { type ReactNode, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import { ConsentBanner } from '../ui/ConsentBanner';
 import { Button } from '../ui/Button';
 
@@ -10,8 +11,11 @@ interface PageWrapperProps {
 
 export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
   const { usuario, logout } = useAuth();
+  const { items } = useCart();
   const navigate = useNavigate();
   const [isLoggingOff, setIsLoggingOff] = useState(false);
+
+  const quantidadeTotal = items.reduce((acc, item) => acc + item.quantidade, 0);
 
   const handleLogout = () => {
     setIsLoggingOff(true); // Ativa o aviso visual de logoff
@@ -27,11 +31,29 @@ export const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f8f9fa' }}>
       <header className="app-header">
-        <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold' }}>Raízes do Nordeste</h1>
+        <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => usuario && navigate('/franquias')}>Raízes do Nordeste</h1>
         {usuario && (
-          <div className="header-user">
-            <span style={{ fontWeight: '500' }}>Olá, {usuario.nome}</span>
-            <Button variant="secondary" onClick={handleLogout}>Sair</Button>
+          <div className="header-user" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{ fontWeight: '500', display: 'none', '@media (min-width: 600px)': { display: 'inline' } } as any}>Olá, {usuario.nome}</span>
+            
+            <div style={{ position: 'relative', display: 'inline-block', cursor: 'pointer' }} onClick={() => navigate('/carrinho')}>
+              <span style={{ fontSize: '1.5rem' }}>🛒</span>
+              {quantidadeTotal > 0 && (
+                <span className="cart-badge" key={quantidadeTotal} style={{ position: 'absolute', top: '-8px', right: '-8px' }}>
+                  {quantidadeTotal}
+                </span>
+              )}
+            </div>
+
+            <Button variant="secondary" onClick={() => navigate('/sobre')} style={{ padding: '0.4rem 0.8rem' }}>
+              Sobre
+            </Button>
+
+            <Button variant="secondary" onClick={() => navigate('/perfil')} style={{ padding: '0.4rem 0.8rem' }}>
+              👤 Perfil
+            </Button>
+            
+            <Button variant="secondary" onClick={handleLogout} style={{ padding: '0.4rem 0.8rem' }}>Sair</Button>
           </div>
         )}
       </header>

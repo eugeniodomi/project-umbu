@@ -1,0 +1,13 @@
+{
+  "enderecoPadrao": {
+    "rua": "Rua das Flores",
+    "numero": "123",
+    "bairro": "Centro",
+    "cep": "50000-000"
+  },
+  "metodosPagamento": [
+    { "id": "card-1", "nome": "Cartão final 4321" },
+    { "id": "card-2", "nome": "Cartão final 9876" },
+    { "id": "pix-1", "nome": "Chave Pix" }
+  ]
+}

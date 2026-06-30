@@ -1,34 +1,78 @@
-projeto-umbu/
-├── cypress/                # Testes end-to-end (E2E) da aplicação utilizando o Cypress
-│   └── e2e/                # Cenários de teste automatizados simulando ações do usuário
-├── public/                 # Arquivos estáticos servidos diretamente na raiz
-├── src/                    # Código-fonte principal da aplicação React
-│   ├── __tests__/          # Testes unitários e de integração utilizando o Vitest
-│   ├── application/        # Camada de Aplicação: Orquestração de casos de uso (Use Cases) e fluxos
-│   │   ├── services/       # Lógicas de coordenação entre domínio e infraestrutura
-│   │   └── useCases/       # Regras específicas da aplicação que executam ações do usuário
-│   ├── assets/             # Imagens, fontes e outros recursos estáticos
-│   ├── components/         # Camada UI: Componentes visuais reutilizáveis (botões, modais, etc)
-│   ├── context/            # Gerenciamento de estado global com React Context API
-│   ├── domain/             # Camada de Domínio: Regras de negócio puras (independente de framework)
-│   │   ├── models/         # Entidades de negócio, interfaces e tipos TypeScript
-│   │   └── rules/          # Validações e lógicas centrais exclusivas do negócio
-│   ├── hooks/              # Custom React Hooks para encapsular lógica de componentes UI
-│   ├── infrastructure/     # Camada de Infraestrutura: Comunicação com o mundo externo
-│   │   ├── api/            # Integrações com APIs externas, configuração de clientes HTTP
-│   │   └── mock/           # Dados simulados localmente para desenvolvimento (JSONs)
-│   ├── pages/              # Camada UI/Pages: Telas principais associadas a rotas da aplicação
-│   │   ├── CartPage.tsx
-│   │   ├── CheckoutPage.tsx
-│   │   ├── FidelizacaoPage.tsx
-│   │   ├── FranquiaSelectionPage.tsx
-│   │   ├── LoginPage.tsx
-│   │   └── MenuPage.tsx
-│   ├── utils/              # Funções utilitárias auxiliares genéricas
-│   ├── App.tsx             # Componente raiz que agrupa providers e sistema de rotas
-│   └── main.tsx            # Ponto de entrada (entry point) principal do React no DOM
-├── cypress.config.ts       # Arquivo de configuração base do Cypress (Testes E2E)
-├── vitest.config.ts        # Arquivo de configuração base do Vitest (Testes Unitários)
-├── vite.config.ts          # Configuração da ferramenta de build e servidor local Vite
-├── package.json            # Definição das dependências do projeto e scripts de execução
-└── README.md               # Documentação principal com instruções do projeto
+project-umbu/
+├── README.md - Documentação principal do projeto
+├── index.html - Arquivo principal de entrada da aplicação web
+├── package-lock.json - Controle de versões de dependências instaladas
+├── package.json - Configurações do projeto e dependências (scripts, NPM)
+├── tsconfig.app.json - Configuração do TypeScript para o código da aplicação
+├── tsconfig.json - Configuração base do TypeScript no projeto
+├── tsconfig.node.json - Configuração do TypeScript para ferramentas (ex. Vite)
+├── vite.config.ts - Configuração do bundler Vite
+├── vitest.config.ts - Configuração do framework de testes Vitest
+├── cypress.config.ts - Configuração do framework de testes Cypress (E2E)
+├── .gitignore - Regras de arquivos e pastas ignorados pelo Git
+├── .gitattributes - Configurações e atributos do Git
+├── .oxlintrc.json - Configuração do linter Oxlint
+├── cypress/ - Testes de ponta a ponta (E2E) simulando usuário real
+│   └── e2e/
+│       └── fluxo-critico.cy.ts
+├── public/ - Arquivos estáticos disponibilizados publicamente
+│   ├── favicon.svg
+│   └── icons.svg
+└── src/ - Código fonte principal da aplicação Raízes do Nordeste
+    ├── App.tsx - Componente raiz que agrupa as rotas da aplicação
+    ├── main.tsx - Ponto de montagem (entry point) do React no DOM
+    ├── index.css - Estilos globais e variáveis de tema da aplicação
+    ├── __tests__/ - Testes unitários para validar lógicas isoladas
+    │   ├── application/
+    │   │   └── fidelizacaoService.test.ts
+    │   ├── domain/
+    │   │   └── validarPedido.test.ts
+    │   └── infrastructure/
+    │       └── paymentMockService.test.ts
+    ├── application/ - Orquestração e serviços de aplicação (Casos de Uso)
+    │   ├── services/
+    │   │   └── fidelizacaoService.ts
+    │   └── useCases/
+    ├── assets/ - Imagens e arquivos de mídia usados na interface
+    ├── components/ - Componentes de interface reutilizáveis
+    │   ├── layout/ - Componentes estruturais (containers, wrappers)
+    │   │   ├── PageWrapper.tsx
+    │   │   └── index.ts
+    │   └── ui/ - Componentes visuais atômicos e genéricos
+    │       ├── Button.tsx - Botão padronizado
+    │       ├── ConsentBanner.tsx - Banner de consentimento (LGPD)
+    │       ├── Input.tsx - Campo de entrada de dados
+    │       └── index.ts
+    ├── context/ - Contextos React para gerenciar estado global
+    │   ├── AuthContext.tsx - Estado e funções de autenticação do usuário
+    │   ├── CartContext.tsx - Estado e ações do carrinho de compras
+    │   └── index.ts
+    ├── domain/ - Regras de negócio puras, sem dependências externas
+    │   ├── models/ - Tipos e interfaces das entidades centrais
+    │   │   ├── Franquia.ts
+    │   │   ├── Pedido.ts
+    │   │   ├── Produto.ts
+    │   │   ├── Usuario.ts
+    │   │   └── index.ts
+    │   └── rules/ - Funções com as lógicas puras de negócio (ex. validações)
+    │       └── validarPedido.ts
+    ├── hooks/ - Hooks customizados do React
+    ├── infrastructure/ - Código de comunicação com mundo externo (APIs, bancos)
+    │   ├── api/ - Integrações com serviços e APIs
+    │   │   └── paymentMockService.ts
+    │   └── mock/ - Dados fixos simulando respostas do backend
+    │       ├── franquias.json
+    │       ├── perfil.json
+    │       ├── produtos.json
+    │       └── usuarios.json
+    ├── pages/ - Telas e páginas roteáveis da aplicação
+    │   ├── AboutPage.tsx - Tela Institucional e Sobre o Projeto
+    │   ├── CartPage.tsx - Tela do carrinho com itens e total
+    │   ├── CheckoutPage.tsx - Tela de pagamento e finalização
+    │   ├── FidelizacaoPage.tsx - Tela para programa de pontos
+    │   ├── FranquiaSelectionPage.tsx - Tela para o usuário escolher a loja
+    │   ├── LoginPage.tsx - Tela de login no sistema
+    │   ├── MenuPage.tsx - Tela do cardápio principal com produtos
+    │   └── ProfilePage.tsx - Tela de perfil (endereços, cartões, etc)
+    └── utils/ - Funções utilitárias auxiliares de uso geral
+        └── logger.ts - Utilitário para salvar logs ou interações do usuário

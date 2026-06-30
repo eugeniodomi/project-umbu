@@ -3,18 +3,21 @@
     "id": "f1",
     "nome": "Franquia Centro",
     "status": "ativa",
-    "canais": ["APP", "TOTEM", "PICKUP"]
+    "canais": ["APP", "TOTEM", "PICKUP"],
+    "tempoEntrega": "30-45 min"
   },
   {
     "id": "f2",
     "nome": "Franquia Shopping Norte",
     "status": "ativa",
-    "canais": ["APP", "PICKUP"]
+    "canais": ["APP", "PICKUP"],
+    "tempoEntrega": "40-60 min"
   },
   {
     "id": "f3",
     "nome": "Franquia Bairro Sul",
     "status": "reduzida",
-    "canais": ["PICKUP"]
+    "canais": ["PICKUP"],
+    "tempoEntrega": "50-70 min"
   }
 ]

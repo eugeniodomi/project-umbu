@@ -5,12 +5,16 @@ import { Button } from '../components/ui/Button';
 import { processarPagamento } from '../infrastructure/api/paymentMockService';
 import { logEvent } from '../utils/logger';
 import { calcularPontos } from '../application/services/fidelizacaoService';
+import perfilMock from '../infrastructure/mock/perfil.json';
 
 export const CheckoutPage: React.FC = () => {
   const { items, valorTotal, limparCarrinho } = useCart();
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  
+  const [enderecoEntrega, setEnderecoEntrega] = useState(perfilMock.enderecoPadrao);
+  const [metodoPagamento, setMetodoPagamento] = useState(perfilMock.metodosPagamento[0].id);
 
   if (items.length === 0) {
     return (
@@ -56,6 +60,69 @@ export const CheckoutPage: React.FC = () => {
     <div className="page-container fade-in" style={{ maxWidth: '800px' }}>
       <h2 style={{ marginBottom: '2rem', color: 'var(--color-primary)' }}>Checkout</h2>
       
+      <div className="card" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ marginTop: 0, color: 'var(--color-text-main)' }}>Endereço de Entrega</h3>
+        <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: '3fr 1fr' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, fontSize: '0.9rem' }}>Rua</label>
+            <input 
+              type="text" 
+              value={enderecoEntrega.rua}
+              onChange={(e) => setEnderecoEntrega({...enderecoEntrega, rua: e.target.value})}
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, fontSize: '0.9rem' }}>Número</label>
+            <input 
+              type="text" 
+              value={enderecoEntrega.numero}
+              onChange={(e) => setEnderecoEntrega({...enderecoEntrega, numero: e.target.value})}
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+            />
+          </div>
+        </div>
+        <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: '2fr 1fr', marginTop: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, fontSize: '0.9rem' }}>Bairro</label>
+            <input 
+              type="text" 
+              value={enderecoEntrega.bairro}
+              onChange={(e) => setEnderecoEntrega({...enderecoEntrega, bairro: e.target.value})}
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500, fontSize: '0.9rem' }}>CEP</label>
+            <input 
+              type="text" 
+              value={enderecoEntrega.cep}
+              onChange={(e) => setEnderecoEntrega({...enderecoEntrega, cep: e.target.value})}
+              style={{ width: '100%', padding: '0.6rem', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="card" style={{ marginBottom: '1.5rem' }}>
+        <h3 style={{ marginTop: 0, color: 'var(--color-text-main)' }}>Forma de Pagamento</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {perfilMock.metodosPagamento.map(metodo => (
+            <label key={metodo.id} style={{ display: 'flex', alignItems: 'center', padding: '0.75rem', border: '1px solid #E5E7EB', borderRadius: '8px', cursor: 'pointer', backgroundColor: metodoPagamento === metodo.id ? '#F0FDF4' : '#FFF', borderColor: metodoPagamento === metodo.id ? '#166534' : '#E5E7EB' }}>
+              <input 
+                type="radio" 
+                name="pagamento" 
+                value={metodo.id} 
+                checked={metodoPagamento === metodo.id}
+                onChange={() => setMetodoPagamento(metodo.id)}
+                style={{ marginRight: '0.75rem' }}
+              />
+              <span style={{ fontWeight: 500 }}>{metodo.nome}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
       <div className="card" style={{ marginBottom: '2rem' }}>
         <h3 style={{ marginTop: 0, color: 'var(--color-text-main)' }}>Resumo do Pedido</h3>
         <ul style={{ listStyle: 'none', padding: 0 }}>

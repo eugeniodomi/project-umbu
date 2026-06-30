@@ -39,14 +39,25 @@ export const FranquiaSelectionPage: React.FC = () => {
     <div className="page-container fade-in">
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h2 style={{ margin: 0, color: 'var(--color-primary)' }}>Selecione uma Franquia</h2>
+        <p style={{ color: 'var(--color-text-muted)', marginTop: '0.5rem', fontSize: '1.1rem', maxWidth: '600px', margin: '0.5rem auto 0' }}>
+          Tradição e sabor da nossa terra entregues com qualidade e rapidez para você. Escolha a unidade mais próxima!
+        </p>
       </div>
       <div className="responsive-grid">
         {franquiasData.map((franquia) => (
           <div key={franquia.id} className="card clickable">
             <h3 style={{ marginTop: 0, marginBottom: '0.5rem', color: 'var(--color-primary)' }}>{franquia.nome}</h3>
-            <div style={{ marginBottom: '1rem' }}>
+            
+            <div style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
               {getStatusDisplay(franquia.status)}
+              
+              {franquia.tempoEntrega && (
+                <span style={{ display: 'inline-flex', alignItems: 'center', backgroundColor: '#F3F4F6', color: '#4B5563', padding: '4px 12px', borderRadius: '16px', fontSize: '0.9rem', fontWeight: 600 }}>
+                  ⏱️ {franquia.tempoEntrega}
+                </span>
+              )}
             </div>
+
             <p style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
               <span style={{ marginRight: '0.5rem', fontWeight: 500 }}>Atendimento:</span>
               {franquia.canais.map(canal => {
