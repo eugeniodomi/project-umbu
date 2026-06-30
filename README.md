@@ -6,6 +6,16 @@ O foco principal deste projeto **não é** a entrega de um produto comercial com
 
 ---
 
+## 🌐 Acesso rápido à aplicação
+
+A versão funcional publicada para validação está disponível no link abaixo. Esse acesso pode ser utilizado pelo avaliador e por qualquer pessoa interessada em testar a aplicação:
+
+- **Aplicação online:** [https://eugeniodomi.github.io/project-umbu/](https://eugeniodomi.github.io/project-umbu/)
+
+A interface permite validar o fluxo principal do sistema, incluindo login, seleção de franquia, carrinho, checkout simulado, conformidade LGPD e responsividade mobile.
+
+---
+
 ## 🎯 Objetivos do Projeto
 
 - **Padronização do Atendimento:** Interface unificada para operação multicanal (App, Totem, Retirada).
