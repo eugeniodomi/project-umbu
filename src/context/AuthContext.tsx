@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, type ReactNode } from 'react';
 import { type Usuario } from '../domain/models/Usuario';
 import usuariosMock from '../infrastructure/mock/usuarios.json';
+import { auth } from '../services/auth';
 
 interface AuthContextData {
   usuario: Usuario | null;
@@ -28,6 +29,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     setUsuario(null);
+    auth.logout();
   };
 
   return (

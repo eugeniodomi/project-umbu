@@ -258,3 +258,28 @@ body {
   50% { transform: scale(1.2); }
   100% { transform: scale(1); }
 }
+
+/* garantir que inputs e botões tenham maior z-index que banners quando banner invisível */
+#rgpd-banner[data-visible="false"] {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* quando visível, banner fica fixo abaixo, mas evita cobrir campos por usar max-height e scroll interno */
+#rgpd-banner[data-visible="true"] > div {
+  max-height: 48vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* certificar que inputs do app tenham z-index maior quando o banner estiver invisível */
+main, form, .app-root {
+  position: relative;
+  z-index: 0;
+}
+
+input, button, select, textarea {
+  position: relative;
+  z-index: 1;
+}

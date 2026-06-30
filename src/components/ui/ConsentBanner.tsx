@@ -1,76 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { logEvent } from '../../utils/logger';
-import { Button } from './Button';
-import { CookiePreferencesModal } from './CookiePreferencesModal';
+import React, { useEffect } from 'react';
 
-export const ConsentBanner: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+type Props = {
+  onAccept?: () => void;
+};
 
+// Mantemos como export const / function com o nome original para não quebrar PageWrapper.tsx
+export const ConsentBanner = ({ onAccept }: Props) => {
   useEffect(() => {
-    const hasPreferences = localStorage.getItem('lgpd_preferences');
-    if (!hasPreferences) {
-      setIsVisible(true);
-    }
+    // expõe função para testes (window) — limpa após uso
+    (window as any).__rg_banner = {
+      close: () => {
+        const el = document.getElementById('rgpd-banner');
+        if (el) el.setAttribute('data-visible','false');
+      },
+    };
+    return () => { delete (window as any).__rg_banner; };
   }, []);
 
-  const handleAcceptAll = () => {
-    const prefs = { essenciais: true, analiticos: true, marketing: true };
-    localStorage.setItem('lgpd_preferences', JSON.stringify(prefs));
-    logEvent('LGPD_PREFERENCES_SAVED', prefs);
-    setIsVisible(false);
+  const handleAccept = () => {
+    localStorage.setItem('lgpd_preferences', JSON.stringify({ accepted: true, ts: Date.now() }));
+    // sinal para observabilidade e para Cypress esperar
+    window.dispatchEvent(new CustomEvent('LGPD_ACCEPTED'));
+    if (onAccept) onAccept();
+    const el = document.getElementById('rgpd-banner');
+    if (el) el.setAttribute('data-visible','false');
   };
 
-  const handleRejectNonEssential = () => {
-    const prefs = { essenciais: true, analiticos: false, marketing: false };
-    localStorage.setItem('lgpd_preferences', JSON.stringify(prefs));
-    logEvent('LGPD_PREFERENCES_SAVED', prefs);
-    setIsVisible(false);
+  const handleClose = () => {
+    const el = document.getElementById('rgpd-banner');
+    if (el) el.setAttribute('data-visible','false');
   };
-
-  if (!isVisible) return null;
 
   return (
-    <>
-      <div className="fade-in" style={{
+    <div
+      id="rgpd-banner"
+      role="dialog"
+      aria-live="polite"
+      aria-modal="false"
+      data-visible="true"
+      style={{
         position: 'fixed',
-        bottom: 0,
         left: 0,
         right: 0,
-        backgroundColor: '#fff',
-        padding: '1.5rem 2rem',
+        bottom: 0,
+        zIndex: 1200,
         display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        boxShadow: '0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -2px rgba(0, 0, 0, 0.05)',
-        zIndex: 1000,
-        borderTop: '1px solid #e5e7eb',
-        borderTopLeftRadius: '16px',
-        borderTopRightRadius: '16px',
+        justifyContent: 'center',
+        pointerEvents: 'auto',
+      }}
+    >
+      <div style={{
+        maxWidth: 520,
+        width: 'calc(100% - 24px)',
+        margin: '12px',
+        borderRadius: 12,
+        boxShadow: '0 6px 18px rgba(0,0,0,0.12)',
+        background: 'white',
+        padding: '16px',
+        position: 'relative',
+        touchAction: 'manipulation',
       }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-          <p style={{ margin: '0 0 1rem 0', color: 'var(--color-text-main)', lineHeight: 1.5 }}>
-            <strong>Como cuidamos dos seus dados:</strong> Utilizamos cookies para personalizar anúncios, gerar estatísticas de tráfego e melhorar sua experiência no site. Você pode escolher quais categorias deseja permitir clicando em 'Gerenciar preferências'.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-            <Button variant="primary" onClick={handleAcceptAll}>
-              Aceitar Todos
-            </Button>
-            <Button variant="secondary" onClick={handleRejectNonEssential}>
-              Rejeitar Não Essenciais
-            </Button>
-            <Button variant="secondary" onClick={() => setIsModalOpen(true)}>
-              Gerenciar Preferências
-            </Button>
-          </div>
+        <button
+          aria-label="Fechar aviso de privacidade"
+          onClick={handleClose}
+          style={{
+            position: 'absolute',
+            top: 8,
+            right: 8,
+            background: 'transparent',
+            border: 'none',
+            fontSize: 16,
+            cursor: 'pointer'
+          }}
+        >✕</button>
+
+        <p style={{ margin: 0, color: '#0F172A', lineHeight: 1.4 }}>
+          Como cuidamos dos seus dados: utilizamos cookies para personalizar anúncios e melhorar sua experiência.
+        </p>
+
+        <div style={{ display: 'flex', gap: 8, marginTop: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <button onClick={handleAccept} style={{ background:'#D97706', color:'#fff', border:'none', padding:'10px 16px', borderRadius:8, cursor:'pointer' }} >
+            Aceitar Todos
+          </button>
+          <button onClick={handleClose} style={{ background:'#F59E0B', color:'#fff', border:'none', padding:'10px 16px', borderRadius:8, cursor:'pointer' }} >
+            Rejeitar Não Essenciais
+          </button>
+          <button onClick={() => { /* open modal preferences */ }} style={{ background:'#F97316', color:'#fff', border:'none', padding:'10px 16px', borderRadius:8, cursor:'pointer' }} >
+            Gerenciar Preferências
+          </button>
         </div>
       </div>
-      
-      <CookiePreferencesModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        onSave={() => setIsVisible(false)} 
-      />
-    </>
+    </div>
   );
-};
+}

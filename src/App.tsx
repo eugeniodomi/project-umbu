@@ -1,7 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { PageWrapper } from './components/layout/PageWrapper';
+import { auth } from './services/auth';
 
 // Pages
 import { LoginPage } from './pages/LoginPage';
@@ -12,6 +13,24 @@ import { CheckoutPage } from './pages/CheckoutPage';
 import { FidelizacaoPage } from './pages/FidelizacaoPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { AboutPage } from './pages/AboutPage';
+import { Failed } from './pages/Failed';
+
+function RequireAuth({ children }: { children: JSX.Element }) {
+  const location = useLocation();
+  if (!auth.isAuthenticated()) {
+    // redirect to /failed (requested behavior)
+    return <Navigate to="/failed" state={{ from: location }} replace />;
+  }
+  return children;
+}
+
+function PreventAuthAccess({ children }: { children: JSX.Element }) {
+  // Prevent access to login page when already authenticated
+  if (auth.isAuthenticated()) {
+    return <Navigate to="/franquias" replace />;
+  }
+  return children;
+}
 
 const App = () => {
   return (
@@ -20,14 +39,47 @@ const App = () => {
         <CartProvider>
           <PageWrapper>
             <Routes>
-              <Route path="/" element={<LoginPage />} />
-              <Route path="/franquias" element={<FranquiaSelectionPage />} />
-              <Route path="/cardapio" element={<MenuPage />} />
-              <Route path="/carrinho" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/fidelizacao" element={<FidelizacaoPage />} />
-              <Route path="/perfil" element={<ProfilePage />} />
-              <Route path="/sobre" element={<AboutPage />} />
+              <Route path="/" element={
+                <PreventAuthAccess>
+                  <LoginPage />
+                </PreventAuthAccess>
+              } />
+              <Route path="/franquias" element={
+                <RequireAuth>
+                  <FranquiaSelectionPage />
+                </RequireAuth>
+              } />
+              <Route path="/cardapio" element={
+                <RequireAuth>
+                  <MenuPage />
+                </RequireAuth>
+              } />
+              <Route path="/carrinho" element={
+                <RequireAuth>
+                  <CartPage />
+                </RequireAuth>
+              } />
+              <Route path="/checkout" element={
+                <RequireAuth>
+                  <CheckoutPage />
+                </RequireAuth>
+              } />
+              <Route path="/fidelizacao" element={
+                <RequireAuth>
+                  <FidelizacaoPage />
+                </RequireAuth>
+              } />
+              <Route path="/perfil" element={
+                <RequireAuth>
+                  <ProfilePage />
+                </RequireAuth>
+              } />
+              <Route path="/sobre" element={
+                <RequireAuth>
+                  <AboutPage />
+                </RequireAuth>
+              } />
+              <Route path="/failed" element={<Failed />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </PageWrapper>

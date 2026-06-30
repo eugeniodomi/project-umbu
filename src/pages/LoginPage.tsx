@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import { auth } from '../services/auth';
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (usuario) {
+    if (usuario || auth.isAuthenticated()) {
       navigate('/franquias', { replace: true });
     }
   }, [usuario, navigate]);
@@ -22,7 +23,9 @@ export const LoginPage: React.FC = () => {
     setError('');
     try {
       login(email, senha);
-      navigate('/franquias');
+      const token = 'mock-token-' + Date.now();
+      auth.login(token);
+      navigate('/franquias', { replace: true });
     } catch (err: any) {
       setError(err.message || 'Erro ao realizar login');
     }
