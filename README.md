@@ -1,8 +1,8 @@
-# 🍔 Raízes do Nordeste - Sistema de Franquias (QA & Front-end)
+# Raízes do Nordeste - Sistema de Franquias (QA & Front-end)
 
 Este repositório contém a aplicação baseada no estudo de caso "Raízes do Nordeste", desenvolvida como requisito prático para a disciplina de **Projeto Multidisciplinar - Qualidade de Software**.
 
-## 🌐 Acesso rápido
+## Acesso rápido
 
 - **Aplicação online:** [https://eugeniodomi.github.io/project-umbu/](https://eugeniodomi.github.io/project-umbu/)
 - **Repositório GitHub:** [https://github.com/eugeniodomi/project-umbu](https://github.com/eugeniodomi/project-umbu)
@@ -13,7 +13,7 @@ O foco principal deste projeto **não é** a entrega de um produto comercial com
 
 ---
 
-## 🌐 Acesso rápido à aplicação
+## Acesso rápido à aplicação
 
 A versão funcional publicada para validação está disponível no link abaixo. Esse acesso pode ser utilizado pelo avaliador e por qualquer pessoa interessada em testar a aplicação:
 
@@ -23,14 +23,14 @@ A interface permite validar o fluxo principal do sistema, incluindo login, sele�
 
 ---
 
-## 🎯 Objetivos do Projeto
+## Objetivos do Projeto
 
 - **Padronização do Atendimento:** Interface unificada para operação multicanal (App, Totem, Retirada).
 - **Cobertura de Testes:** Implementação de testes em camadas para assegurar regras de negócio e fluxos críticos.
 - **Conformidade Legal:** Aplicação prática da Lei Geral de Proteção de Dados (LGPD) na interface.
 - **Separação de Responsabilidades:** Arquitetura limpa para isolar regras de negócio, interface e infraestrutura externa.
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 - **Front-end:** React 19, Vite
 - **Linguagem:** TypeScript (Tipagem estática e segurança)
@@ -41,7 +41,7 @@ A interface permite validar o fluxo principal do sistema, incluindo login, sele�
 
 ---
 
-## 🏗️ Arquitetura e Estrutura de Diretórios
+## Arquitetura e Estrutura de Diretórios
 
 O projeto foi estruturado com inspiração em princípios de *Domain-Driven Design (DDD)*, garantindo que as lógicas de testes possam atuar em camadas isoladas:
 
@@ -85,7 +85,7 @@ confiabilidade dos mocks de infraestrutura.
 A automação valida o aceite da LGPD, a submissão de login, a seleção de franquia, a adição de
 produtos ao carrinho e a finalização do checkout.
 ---
-## 🚀 Como Executar o Projeto
+## Como Executar o Projeto
 > **Pré-requisito:** Certifique-se de ter o **Node.js** (versão 18 ou superior) instalado em seu ambiente.
 ### 1. Instalação das dependências
 ```bash
@@ -104,7 +104,7 @@ acompanhar os eventos de observabilidade registrados durante a navegação (ex: 
 npm run test
 ```
 ### 4. Executar Testes End-to-End (Interface Gráfica)
-⚠️ *Importante: O servidor de desenvolvimento (passo 2) deve estar rodando em um terminal separado
+ *Importante: O servidor de desenvolvimento (passo 2) deve estar rodando em um terminal separado
 antes de iniciar a interface de testes E2E.*
 ```bash
 npm run cypress:open
