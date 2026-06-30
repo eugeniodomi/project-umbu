@@ -76,3 +76,5 @@ project-umbu/
     │   └── ProfilePage.tsx - Tela de perfil (endereços, cartões, etc)
     └── utils/ - Funções utilitárias auxiliares de uso geral
         └── logger.ts - Utilitário para salvar logs ou interações do usuário
+
+....
